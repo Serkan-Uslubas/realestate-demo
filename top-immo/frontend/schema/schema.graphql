@@ -1,0 +1,65 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+enum OfferType {
+  SALE
+  RENT
+}
+
+type Agent {
+  id: UUID!
+  fullName: String!
+  email: String!
+  phone: String
+  createdAtUtc: DateTime!
+}
+
+type Property {
+  id: UUID!
+  slug: String!
+  title: String!
+  description: String
+  city: String!
+  postalCode: String!
+  street: String!
+  offerType: OfferType!
+  price: Decimal!
+  bedrooms: Int!
+  bathrooms: Int!
+  areaSqm: Decimal!
+  isPublished: Boolean!
+  createdAtUtc: DateTime!
+  updatedAtUtc: DateTime!
+}
+
+input CreatePropertyInput {
+  slug: String!
+  title: String!
+  description: String
+  city: String!
+  postalCode: String!
+  street: String!
+  offerType: OfferType!
+  price: Decimal!
+  bedrooms: Int!
+  bathrooms: Int!
+  areaSqm: Decimal!
+  isPublished: Boolean!
+  agentId: UUID
+}
+
+type Query {
+  properties(take: Int!): [Property!]!
+  propertyBySlug(slug: String!): Property
+  agents: [Agent!]!
+}
+
+type Mutation {
+  createProperty(input: CreatePropertyInput!): Property!
+}
+
+scalar DateTime
+scalar Decimal
+scalar UUID

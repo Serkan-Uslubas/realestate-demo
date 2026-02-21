@@ -1,0 +1,7 @@
+module.exports = {
+  schema: "./schema/schema.graphql",
+  src: "./src",
+  language: "typescript",
+  artifactDirectory: "./src/__generated__",
+  eagerEsModules: true
+};
